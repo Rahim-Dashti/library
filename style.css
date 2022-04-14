@@ -1,0 +1,118 @@
+body , html {
+    margin: 0;
+    font-family: roboto;;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: 4fr 1fr 9fr;
+    height: 100vh;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 1fr;
+}
+
+.header-logo-section {
+    grid-area: 1/1/1/2;
+    display: flex;
+    margin: auto;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.header-log-section {
+    grid-area: 1/3/-1/-1;
+    margin: auto;
+}
+
+.info-bar {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: 1fr;
+    background-color: rgb(211, 230, 230);
+    border-radius: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.info-bar-order-section {
+    grid-area: 1/1/2/2;
+}
+
+.info-bar-color-section {
+    grid-area: 1/2/2/-1;
+}
+
+.main {
+    background-color: yellow;
+}
+
+.library-text {
+    margin: auto;
+    padding-left: 1rem;
+}
+
+.log-card {
+    border: solid 1px rgb(194, 174, 174);
+    border-radius: .3rem;
+    display: grid;
+    margin: auto;
+    background: linear-gradient(#daebec,#ddf3f7);
+    height: 10rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+.log-card-title {
+    margin: auto;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.log-count-section {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.log-count-section > div {
+    padding-left: 1rem;
+}
+
+.info-bar-color-section , .info-bar-color-section >div{
+    display: flex;
+    margin-left: auto;
+}
+
+.info-color-card {
+    border: 1px solid;
+    width: 3rem;
+    height: 1.5rem;
+    border-radius: 1rem;
+}
+
+.info-bar-color-section >div {
+    margin-right: 1rem;
+    margin: auto 1rem auto;
+    width: 10rem;
+}
+
+.info-bar-color-section >div > div {
+    padding-right: 1rem ;
+    margin: auto;
+}
+
+.info-read-card {
+    background: linear-gradient(#bae6fd,#0284c7);
+    width: 3rem;
+    height: 1.5rem;
+}
+
+.info-not-read-card {
+    background: linear-gradient(#fda4af,#f43f5e);
+    width: 3rem;
+    height: 1.5rem;
+}
