@@ -20,7 +20,7 @@ body , html {
     grid-area: 1/1/1/2;
     display: flex;
     margin: auto;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 700;
 }
 
@@ -37,6 +37,8 @@ body , html {
     border-radius: 1rem;
     padding-top: .5rem;
     padding-bottom: .5rem;
+    position: sticky;
+    top: 0;
 }
 
 .info-bar-order-section {
@@ -48,7 +50,7 @@ body , html {
 }
 
 .main {
-    background-color: yellow;
+    
 }
 
 .library-text {
@@ -115,4 +117,45 @@ body , html {
     background: linear-gradient(#fda4af,#f43f5e);
     width: 3rem;
     height: 1.5rem;
+}
+
+.add-book-button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 2rem;
+}
+
+.book-cards-section {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(2,1fr);
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.book-card {
+    width: 100%;
+    height: 50vh;
+    border: solid 1px rgb(155, 154, 154);
+    border-radius: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 3fr repeat(3,2fr);
+    background: linear-gradient(#bae6fd,#0284c7);
+}
+
+.close-button {
+    display: flex;
+    margin-left: auto;
+    padding: 1rem;
+}
+
+.book-card > div {
+    padding: 1rem;
+}
+
+.book-title {
+    font-size: 1.5rem;
+    font-weight: 700;
 }
