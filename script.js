@@ -1,27 +1,8 @@
-let library = [ {
-    'title' : 'hello book',
-    'author' : 'Rahim' ,
-    'page' : '123' ,
-    'read' : true } ,
-    {
-    'title' : 'hello book',
-    'author' : 'Rahim' ,
-    'page' : '123' ,
-    'read' : false } ,
-    {
-    'title' : 'hello book',
-    'author' : 'Rahim' ,
-    'page' : '123' ,
-    'read' : true } ,
-    {
-    'title' : 'hello book',
-    'author' : 'Rahim' ,
-    'page' : '123' ,
-    'read' : true } ,
-];
+let library = [];
 
 class book {
-    constructor(title_,author,page,read) {
+    constructor(title_,author,page,read,id) {
+    this.id = id
     this.title = title_.value;
     this.author = author.value;
     this.page = page.value;
@@ -46,13 +27,19 @@ class book {
         )
         readCounter.textContent = readNum 
         notReadCounter.textContent = notReadNum 
-    } }
+        totalCounter.textContent = readNum+notReadNum
+    }
+ }
+
 
 function addbook(title_,author,page,read) {
-    newbook = new book(title_,author,page,read);
+    id = library.length + 1
+    newbook = new book(title_,author,page,read,id);
     library.push(newbook);
     newbook.updateLibraryLog(title_,author,page,read)
+    updateCardLibrary()
 }
+
 
 let bookCardsSection = document.querySelector(".book-cards-section")
 
@@ -131,12 +118,12 @@ function removeBookForm () {
 
 function createBookCard(book) {
     let bookCard = document.createElement('div')
-    bookCard.setAttribute('class','book-card')
+    bookCard.setAttribute('class',`book${book.id} book-card`)
 
     let closeButtondiv = document.createElement('div')
     closeButtondiv.setAttribute('class','close-button')
     let closeButton = document.createElement('button')
-    closeButton.setAttribute('onclick','removeBookForm()')
+    closeButton.addEventListener('click',removeCardButton)
     let closeButtonImage = document.createElement('img')
     closeButtonImage.setAttribute('src','./img/cancel.png')
     closeButton.appendChild(closeButtonImage)
@@ -160,8 +147,11 @@ function createBookCard(book) {
     let bookRead = document.createElement('input')
     bookRead.setAttribute('type','checkbox')
     bookRead.setAttribute('name','read')
-    bookRead.addEventListener('click',checkboxColor)
+    bookRead.setAttribute('class',`book-read-check${book.id}`)
     bookRead.checked = book.read
+    bookRead.addEventListener('click',checkboxColor) 
+    bookRead.addEventListener('click',updateCardLibrary)
+
     let readLabel = document.createElement('label')
     readLabel.setAttribute('id','read')
     readLabel.setAttribute('class','book-read-check')
@@ -180,6 +170,16 @@ function createBookCard(book) {
     bookCard.appendChild(readLabel)
 
     bookCardsSection.appendChild(bookCard)
+}
+
+
+function checkboxColor(e) {
+    if (e.target.checked === true ) {
+        e.target.parentElement.parentElement.style.background = 'linear-gradient(#bae6fd,#0284c7)'
+    }
+    else {
+        e.target.parentElement.parentElement.style.background = 'linear-gradient(#fda4af,#f43f5e)'
+    }
 }
 
 function updateLibraryLog() {
@@ -201,14 +201,32 @@ function updateLibraryLog() {
     )
     readCounter.textContent = readNum 
     notReadCounter.textContent = notReadNum 
+    totalCounter.textContent = readNum+notReadNum
 }
 
-function checkboxColor(e) {
-    if (e.target.checked === true ) {
-        e.target.parentElement.parentElement.style.background = 'linear-gradient(#bae6fd,#0284c7)'
-    }
-    else {
-        e.target.parentElement.parentElement.style.background = 'linear-gradient(#fda4af,#f43f5e)'
+function updateCardLibrary() {
+    for (let i=1;i<library.length+1 ; i++) {
+        item = document.querySelector(`.book-read-check${i}`)
+        if (item.checked === false) {
+            library[i-1]['read'] = false
+        }
+        else {
+            library[i-1]['read'] = true
+        }
     }
     updateLibraryLog()
 }
+
+function removeCardButton(e) {
+    cardNumberString = e.target.parentElement.parentElement.parentElement.classList[0]
+    cardNumber = cardNumberString.match(/\d+/)
+    removeNumber = cardNumber[0]-1
+    library.splice(removeNumber,1)
+    for (i=0 ; i<library.length;i++) {
+        library[i]['id'] = i+1 
+    }
+    console.log(library)
+    updateLibraryLog()
+    updateCardLibrary()
+}
+
